@@ -1,5 +1,6 @@
 package org.iab.vpaid.model {
 	import org.iab.vpaid.VPAIDViewMode;
+
 	import flash.display.DisplayObject;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
@@ -83,16 +84,22 @@ package org.iab.vpaid.model {
 			var handshakeReturn : Boolean = false;
 			if (!handshakeReturn) {
 				try {
-					_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"]("1.1");
+					_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"](VPAID_VERSION_1_1);
 					handshakeReturn = _checkHandShakeVersion(_currentVPAIDAdVersion);
+					if (handshakeReturn) {
+						_currentVPAIDAdVersion = VPAID_VERSION_1_1;
+					}
 				} catch (e : Error) {
 					result = false;
 				}
 			}
 			if (!handshakeReturn) {
 				try {
-					_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"]("2.0");
+					_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"](VPAID_VERSION_2_0);
 					handshakeReturn = _checkHandShakeVersion(_currentVPAIDAdVersion);
+					if (handshakeReturn) {
+						_currentVPAIDAdVersion = VPAID_VERSION_1_1;
+					}
 				} catch (e : Error) {
 					result = false;
 				}
@@ -245,7 +252,7 @@ package org.iab.vpaid.model {
 			}
 			return _currentVPAIDAdVersion;
 		}
-		
+
 		/**
 		 * 
 		 */
