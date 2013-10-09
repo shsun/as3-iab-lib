@@ -103,53 +103,61 @@ package org.iab.vpaid.model {
 		}
 
 		private function addVPAIDSWFListeners() : void {
-			_vpaidAd["addEventListener"]("AdLoaded", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdCreativeView", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdStarted", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdStopped", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdLinearChange", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdExpandedChange", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdRemainingTimeChange", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVolumeChange", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdImpression", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVideoStart", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVideoFirstQuartile", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVideoMidpoint", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVideoThirdQuartile", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdVideoComplete", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdClickThru", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdUserAcceptInvitation", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdUserMinimize", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdUserClose", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdPaused", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdPlaying", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdLog", this.handleVPAIDAdEvent);
-			_vpaidAd["addEventListener"]("AdError", this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_LOADED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_STARTED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_STOPPED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_SKIPPED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_SKIPPABLE_STATE_CHANGED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_SIZE_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_LINEAR_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_DURATION_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_EXPANDED_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_REMAINING_TIME_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VOLUME_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_IMPRESSION, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VIDEO_START, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VIDEO_FIRST_QUARTILE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VIDEO_MIDPOINT, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VIDEO_THIRD_QUARTILE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_VIDEO_COMPLETE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_CLICK_THRU, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_INTERACTION, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_USER_ACCEPT_INVITATION, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_USER_MINIMIZE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_USER_CLOSE, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_PAUSED, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_PLAYING, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_LOG, this.handleVPAIDAdEvent);
+			_vpaidAd["addEventListener"](VPAIDEvent.AD_ERROR, this.handleVPAIDAdEvent);
 		}
 
 		private function removeVPAIDSwfListeners() : void {
-			_vpaidAd["removeEventListener"]("AdLoaded", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdStarted", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdStopped", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdLinearChange", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdExpandedChange", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdRemainingTimeChange", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVolumeChange", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdImpression", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVideoStart", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVideoFirstQuartile", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVideoMidpoint", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVideoThirdQuartile", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdVideoComplete", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdClickThru", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdUserAcceptInvitation", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdUserMinimize", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdUserClose", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdPaused", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdPlaying", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdLog", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdError", this.handleVPAIDAdEvent);
-			_vpaidAd["removeEventListener"]("AdCreativeView", this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_LOADED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_STARTED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_STOPPED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_SKIPPED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_SKIPPABLE_STATE_CHANGED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_SIZE_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_LINEAR_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_DURATION_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_EXPANDED_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_REMAINING_TIME_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VOLUME_CHANGE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_IMPRESSION, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VIDEO_START, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VIDEO_FIRST_QUARTILE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VIDEO_MIDPOINT, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VIDEO_THIRD_QUARTILE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_VIDEO_COMPLETE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_CLICK_THRU, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_INTERACTION, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_USER_ACCEPT_INVITATION, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_USER_MINIMIZE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_USER_CLOSE, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_PAUSED, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_PLAYING, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_LOG, this.handleVPAIDAdEvent);
+			_vpaidAd["removeEventListener"](VPAIDEvent.AD_ERROR, this.handleVPAIDAdEvent);
 		}
 
 		/**
@@ -168,60 +176,20 @@ package org.iab.vpaid.model {
 		private function handleVPAIDAdEvent(event : Object) : void {
 			// Forward events
 			var myVPAIDEvent : VPAIDEvent = new VPAIDEvent(event.type, event.data, event.bubbles, event.cancelable);
-			// this._vpaidElement.dispatchEvent(myVPAIDEvent);
-
 			switch (event.type) {
-				case "AdCreativeView":
-					break;
-				case "AdLoaded" :
-					this.disposeAssetLoadTimer();
-					break;
-				case "AdStarted" :
+				case VPAIDEvent.AD_STARTED :
 					this._vpaidAdShowTimer.start();
 					break;
-				case "AdStopped" :
+				case VPAIDEvent.AD_STOPPED :
 					this.disposeVpaidAdShowTimer();
 					this.removeVPAIDSwfListeners();
 					break;
-				case "AdLinearChange" :
-					break;
-				case "AdExpandedChange" :
-					break;
-				case "AdRemainingTimeChange" :
-					break;
-				case "AdVolumeChange" :
-					break;
-				case "AdPaused" :
-					break;
-				case "AdPlaying" :
-					break;
-				case"AdVideoStart":
-					break;
-				case"AdVideoFirstQuartile":
-					break;
-				case"AdVideoMidpoint":
-					break;
-				case"AdVideoThirdQuartile":
-					break;
-				case"AdVideoComplete":
-					break;
-				case"AdClickThru":
-					dispatchEvent(new Event("AdClickThru"));
-					break;
-				case"AdUserAcceptInvitation":
-					break;
-				case"AdUserMinimize":
-					break;
-				case"AdUserClose":
+				case VPAIDEvent.AD_USER_CLOSE:
 					this.disposeAssetLoadTimer();
 					this.disposeVpaidAdShowTimer();
 					this.removeVPAIDSwfListeners();
 					break;
-				case"AdImpression":
-					break;
-				case "AdLog" :
-					break;
-				case "AdError" :
+				case VPAIDEvent.AD_ERROR :
 					this.disposeAssetLoadTimer();
 					this.disposeVpaidAdShowTimer();
 					this.removeVPAIDSwfListeners();
@@ -270,7 +238,7 @@ package org.iab.vpaid.model {
 			try {
 				_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"](playerVPAIDVersion);
 			} catch (e : Error) {
-				this._vpaidElement.error();
+				//this._vpaidElement.error();
 			}
 			return _currentVPAIDAdVersion;
 		}
