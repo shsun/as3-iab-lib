@@ -1,7 +1,6 @@
 package org.iab.vpaid.model {
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
-	import flash.events.Event;
 	import flash.events.EventDispatcher;
 
 	import org.iab.vpaid.events.VPAIDEvent;
@@ -9,18 +8,20 @@ package org.iab.vpaid.model {
 	/**
 	 * @author shsun
 	 * 
-	 * This class handles communication with v1.1&v2.0 VPAID ads
+	 * This class handles communication with v1.1 VPAID ads
 	 */
-	public class VPAIDWrapper extends EventDispatcher implements IVPAIDBase {
+	public class VPAID_1_1_Wrapper extends EventDispatcher implements IVPAID_1_1_Wrapper {
 		/**
 		 * 
 		 */
-		public const supportedVersions : Vector.<String> = new Vector.<String>("1.1", "2.0");
+		static protected const VPAID_VERSION_1_1 : String = "1.1";
+		static protected const VPAID_VERSION_2_0 : String = "2.0";
+		public const supportedVersions : Vector.<String> = new Vector.<String>(VPAID_VERSION_1_1, VPAID_VERSION_2_0);
 		/**
 		 * 
 		 */
-		private var _vpaidAd : Object;
-		private var _currentVPAIDAdVersion : String;
+		protected var _vpaidAd : Object;
+		protected var _currentVPAIDAdVersion : String;
 		/**
 		 * 
 		 */
@@ -35,7 +36,7 @@ package org.iab.vpaid.model {
 		 * @param assetsLoadTimeout	The timeout of assets loading, in seconds. 
 		 * @param vpaidAdShowTimeout	The timeout of ad showing, in seconds. 0 indicate no limit. 
 		 */
-		public function VPAIDWrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, vpaidAdShowTimeout : int = 0) : void {
+		public function VPAID_1_1_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, vpaidAdShowTimeout : int = 0) : void {
 			this._assetsLoadTimer = new Timer(1000, assetsLoadTimeout);
 			this._assetsLoadTimer.addEventListener(TimerEvent.TIMER, null);
 			//
@@ -238,7 +239,7 @@ package org.iab.vpaid.model {
 			try {
 				_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"](playerVPAIDVersion);
 			} catch (e : Error) {
-				//this._vpaidElement.error();
+				// this._vpaidElement.error();
 			}
 			return _currentVPAIDAdVersion;
 		}
@@ -307,18 +308,18 @@ package org.iab.vpaid.model {
 			}
 		}
 
-		private function error() : void {
-		}
-
-		private function warn() : void {
-		}
-
 		public function get version() : String {
 			return _currentVPAIDAdVersion;
 		}
 
 		public function get api() : Object {
 			return _vpaidAd;
+		}
+
+		protected function error() : void {
+		}
+
+		protected function warn() : void {
 		}
 	}
 }

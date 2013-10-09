@@ -341,6 +341,9 @@ package org.iab.vpaid.events {
 		 */
 		public static const AD_VOLUME_CHANGE : String = "AdVolumeChange";
 
+		/**
+		 * 
+		 */
 		public function VPAIDEvent(type : String, data : Object = null, bubbles : Boolean = false, cancelable : Boolean = false) {
 			_data = data;
 			super(type, bubbles, cancelable);

@@ -1,9 +1,11 @@
 package org.iab.vpaid.model {
 	import flash.events.IEventDispatcher;
+
 	/**
 	 * @author shsun
 	 */
-	public interface IVPAIDBase extends IEventDispatcher {
+	public interface IVPAID_1_1_Wrapper extends IEventDispatcher {
+		
 		// Properties
 		function get api() : Object;
 

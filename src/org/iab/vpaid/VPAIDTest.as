@@ -2,7 +2,7 @@ package org.iab.vpaid {
 	import flash.net.URLRequest;
 	import org.iab.vpaid.elements.VPAIDAdProcessor;
 	import flash.display.LoaderInfo;
-	import org.iab.vpaid.model.VPAIDWrapper;
+	import org.iab.vpaid.model.VPAID_1_1_Wrapper;
 	import flash.events.ProgressEvent;
 	import flash.events.HTTPStatusEvent;
 	import flash.events.IOErrorEvent;
@@ -15,7 +15,7 @@ package org.iab.vpaid {
 	 */
 	public class VPAIDTest extends Sprite {
 		
-		private var wrapper:VPAIDWrapper;
+		private var wrapper:VPAID_1_1_Wrapper;
 		private var processor:VPAIDAdProcessor;
 		
 		public function VPAIDTest() {
@@ -34,7 +34,7 @@ package org.iab.vpaid {
 			trace("completeHandler: " + event);
 			
 			
-			this.wrapper=new VPAIDWrapper((event.target as LoaderInfo).content, this.processor);
+			this.wrapper=new VPAID_1_1_Wrapper((event.target as LoaderInfo).content, this.processor);
 			
 		}
 		private function httpStatusHandler(event : HTTPStatusEvent) : void {
