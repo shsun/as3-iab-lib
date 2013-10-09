@@ -1,4 +1,5 @@
 package org.iab.vpaid.model {
+	import flash.display.DisplayObject;
 	import flash.events.IEventDispatcher;
 
 	/**
@@ -7,7 +8,7 @@ package org.iab.vpaid.model {
 	public interface IVPAID_1_1_Wrapper extends IEventDispatcher {
 		
 		// Properties
-		function get api() : Object;
+		function get api() : DisplayObject;
 
 		function get version() : String;
 
@@ -41,7 +42,7 @@ package org.iab.vpaid.model {
 		function set volumeVPAID(value : Number) : void;
 
 		// Methods
-		function probeVersion() : Boolean
+		function isValidVersion() : Boolean
 
 		/**
 		 * After the ad is loaded and the player calls handshakeVersion, the player calls initVPAID to
@@ -49,7 +50,7 @@ package org.iab.vpaid.model {
 		 * until nearing the ad playback time, however, the ad does not load its assets until initVPAID
 		 * is called.
 		 */
-		function initVPAID(width : Number, height : Number, viewMode : String, desiredBitrate : Number, creativeData : String, environmentVars : String) : void;
+		function initVPAID(width : Number, height : Number, viewMode : String = "normal", desiredBitrate : Number = -1, creativeData : String = null, environmentVars : String = null) : void;
 
 		/**
 		 * Following a resize of the ad UI container, the player calls resizeAd to allow the ad to

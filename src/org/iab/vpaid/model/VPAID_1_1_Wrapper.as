@@ -1,4 +1,6 @@
 package org.iab.vpaid.model {
+	import org.iab.vpaid.VPAIDViewMode;
+	import flash.display.DisplayObject;
 	import flash.events.TimerEvent;
 	import flash.utils.Timer;
 	import flash.events.EventDispatcher;
@@ -75,7 +77,7 @@ package org.iab.vpaid.model {
 		 * If the version number passed to handshake is supported than the Ad is ready to start,
 		 * otherwise an error is dispatched.
 		 */
-		public function probeVersion() : Boolean {
+		public function isValidVersion() : Boolean {
 			var result : Boolean = false;
 			//
 			var handshakeReturn : Boolean = false;
@@ -243,15 +245,15 @@ package org.iab.vpaid.model {
 			}
 			return _currentVPAIDAdVersion;
 		}
-
+		
 		/**
 		 * 
 		 */
-		public function initVPAID(width : Number, height : Number, viewMode : String, desiredBitrate : Number, creativeData : String, environmentVars : String) : void {
+		public function initVPAID(width : Number, height : Number, viewMode : VPAIDViewMode = VPAIDViewMode.normal, desiredBitrate : Number = -1, creativeData : String = null, environmentVars : String = null) : void {
 			this.addVPAIDSWFListeners();
 			try {
 				this._assetsLoadTimer.start();
-				_vpaidAd["initAd"](width, height, viewMode, desiredBitrate, creativeData, environmentVars);
+				_vpaidAd["initAd"](width, height, viewMode.code, desiredBitrate, creativeData, environmentVars);
 			} catch (e : Error) {
 				// this._vpaidElement.error();
 			}
@@ -312,8 +314,8 @@ package org.iab.vpaid.model {
 			return _currentVPAIDAdVersion;
 		}
 
-		public function get api() : Object {
-			return _vpaidAd;
+		public function get api() : DisplayObject {
+			return _vpaidAd as DisplayObject;
 		}
 
 		protected function error() : void {

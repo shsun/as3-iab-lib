@@ -6,6 +6,13 @@ package org.iab.vpaid.model {
 	 */
 	public class VPAID_2_0_Wrapper extends VPAID_1_1_Wrapper implements IVPAID_2_0_Wrapper {
 		/**
+		 * 
+		 */
+		public function VPAID_2_0_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, vpaidAdShowTimeout : int = 0) : void {
+			super(vpaidSWF, assetsLoadTimeout, vpaidAdShowTimeout);
+		}
+
+		/**
 		 * provide current width of ad unit after ad has resized
 		 */
 		public function get widthVPAID() : Number {
