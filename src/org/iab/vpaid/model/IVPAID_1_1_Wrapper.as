@@ -1,4 +1,5 @@
 package org.iab.vpaid.model {
+	import org.iab.vpaid.VPAIDViewMode;
 	import flash.display.DisplayObject;
 	import flash.events.IEventDispatcher;
 
@@ -50,7 +51,7 @@ package org.iab.vpaid.model {
 		 * until nearing the ad playback time, however, the ad does not load its assets until initVPAID
 		 * is called.
 		 */
-		function initVPAID(width : Number, height : Number, viewMode : String = "normal", desiredBitrate : Number = -1, creativeData : String = null, environmentVars : String = null) : void;
+		function initVPAID(width : Number, height : Number, viewMode : VPAIDViewMode = VPAIDViewMode.normal, desiredBitrate : Number = -1, creativeData : String = null, environmentVars : String = null) : void;
 
 		/**
 		 * Following a resize of the ad UI container, the player calls resizeAd to allow the ad to

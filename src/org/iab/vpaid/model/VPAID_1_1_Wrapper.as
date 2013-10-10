@@ -25,10 +25,20 @@ package org.iab.vpaid.model {
 		 */
 		protected var _vpaidAd : Object;
 		protected var _currentVPAIDAdVersion : String;
+		
+		// ---------------------------------------------------------------------------
 		/**
-		 * 
+		 * Calling initAd() and not receiving AdLoaded event
 		 */
 		private var _assetsLoadTimer : Timer;
+		/**
+		 * Calling startAd() and not receiving AdStarted event:
+		 */
+		//private var _adStartTimer : Timer;
+		/**
+		 * Calling stopAd() and not receiving AdStopped event:
+		 */
+		//private var _adStopTimer : Timer;
 		/**
 		 * 
 		 */
@@ -37,11 +47,15 @@ package org.iab.vpaid.model {
 		/**
 		 * @param vpaidSWF
 		 * @param assetsLoadTimeout	The timeout of assets loading, in seconds. 
+		 * @param adStartTimeout
 		 * @param vpaidAdShowTimeout	The timeout of ad showing, in seconds. 0 indicate no limit. 
 		 */
-		public function VPAID_1_1_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, vpaidAdShowTimeout : int = 0) : void {
+		public function VPAID_1_1_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, adStartTimeout : int = 2, vpaidAdShowTimeout : int = 0) : void {
 			this._assetsLoadTimer = new Timer(1000, assetsLoadTimeout);
-			this._assetsLoadTimer.addEventListener(TimerEvent.TIMER, null);
+			this._assetsLoadTimer.addEventListener(TimerEvent.TIMER_COMPLETE, null);
+			//
+			//this._adStartTimer = new Timer(1000, adStartTimeout);
+			//this._adStartTimer.addEventListener(TimerEvent.TIMER_COMPLETE, null);
 			//
 			this._vpaidAdShowTimer = new Timer(1000, vpaidAdShowTimeout);
 			this._vpaidAdShowTimer.addEventListener(TimerEvent.TIMER_COMPLETE, null);
@@ -69,7 +83,7 @@ package org.iab.vpaid.model {
 			}
 			//
 			if (_vpaidAd == null) {
-				// this._vpaidElement.error();
+				this.dispatchEvent(new VPAIDEvent(VPAIDEvent.AD_ERROR, "not vpaid ad creative"));
 			}
 		}
 
@@ -218,7 +232,7 @@ package org.iab.vpaid.model {
 
 		private function disposeAssetLoadTimer() : void {
 			if (this._assetsLoadTimer) {
-				this._assetsLoadTimer.removeEventListener(TimerEvent.TIMER, null);
+				this._assetsLoadTimer.removeEventListener(TimerEvent.TIMER_COMPLETE, null);
 				this._assetsLoadTimer.stop();
 				this._assetsLoadTimer = null;
 			}
@@ -248,7 +262,6 @@ package org.iab.vpaid.model {
 			try {
 				_currentVPAIDAdVersion = _vpaidAd["handshakeVersion"](playerVPAIDVersion);
 			} catch (e : Error) {
-				// this._vpaidElement.error();
 			}
 			return _currentVPAIDAdVersion;
 		}
@@ -262,7 +275,6 @@ package org.iab.vpaid.model {
 				this._assetsLoadTimer.start();
 				_vpaidAd["initAd"](width, height, viewMode.code, desiredBitrate, creativeData, environmentVars);
 			} catch (e : Error) {
-				// this._vpaidElement.error();
 			}
 		}
 
@@ -277,7 +289,6 @@ package org.iab.vpaid.model {
 			try {
 				_vpaidAd["startAd"]();
 			} catch (e : Error) {
-				// this._vpaidElement.error();
 			}
 		}
 
@@ -285,7 +296,6 @@ package org.iab.vpaid.model {
 			try {
 				_vpaidAd["stopAd"]();
 			} catch (e : Error) {
-				// this._vpaidElement.error();
 			}
 		}
 
@@ -326,9 +336,11 @@ package org.iab.vpaid.model {
 		}
 
 		protected function error() : void {
+			// TODO
 		}
 
 		protected function warn() : void {
+			// TODO
 		}
 	}
 }

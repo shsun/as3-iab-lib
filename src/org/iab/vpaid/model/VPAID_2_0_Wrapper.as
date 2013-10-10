@@ -8,8 +8,8 @@ package org.iab.vpaid.model {
 		/**
 		 * 
 		 */
-		public function VPAID_2_0_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, vpaidAdShowTimeout : int = 0) : void {
-			super(vpaidSWF, assetsLoadTimeout, vpaidAdShowTimeout);
+		public function VPAID_2_0_Wrapper(vpaidSWF : Object, assetsLoadTimeout : int = 10, adStartTimeout : int = 2, vpaidAdShowTimeout : int = 0) : void {
+			super(vpaidSWF, assetsLoadTimeout, adStartTimeout, vpaidAdShowTimeout);
 		}
 
 		/**
