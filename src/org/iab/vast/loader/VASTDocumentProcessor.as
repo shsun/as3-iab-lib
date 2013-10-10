@@ -1,105 +1,92 @@
-
 package org.iab.vast.loader {
 	import flash.events.EventDispatcher;
+
 	import org.iab.vast.model.VASTDataObject;
 	import org.iab.vast.model.VASTDocument;
 	import org.iab.vast.parser.base.VAST2TrackingData;
 	import org.osmf.utils.HTTPLoader;
-	
+
 	CONFIG::LOGGING
 	{
 	import org.osmf.logging.Log;
 	import org.osmf.logging.Logger;
-	}
 
+	}
 	[Event("processed")]
 	[Event("processingFailed")]
-	
-	internal class VASTDocumentProcessor extends EventDispatcher
-	{
+	internal class VASTDocumentProcessor extends EventDispatcher {
 		/**
 		 * @private Exposes the same interface as VAST1DocumentProcessor and VAST2DocumentProcessor.
 		 * Determines which processor to use based on the VAST version stored in the VASTDataObject.
-		 */	
-		public function VASTDocumentProcessor(maxNumWrapperRedirects:Number, httpLoader:HTTPLoader)
-		{
+		 */
+		public function VASTDocumentProcessor(maxNumWrapperRedirects : Number, httpLoader : HTTPLoader) {
 			super();
-			
+
 			this.maxNumWrapperRedirects = maxNumWrapperRedirects;
 			this.httpLoader = httpLoader;
 		}
+
 		/**
 		 * @private
-		 */	
-		public function processVASTDocument(documentContents:String, trackingData:VAST2TrackingData = null):void
-		{
-			var processingFailed:Boolean = false;
-			var vastDocument:VASTDocument = null;
-			var documentXML:XML = null;
-			
-			try
-			{
+		 */
+		public function processVASTDocument(documentContents : String, trackingData : VAST2TrackingData = null) : void {
+			var processingFailed : Boolean = false;
+			var vastDocument : VASTDocument = null;
+			var documentXML : XML = null;
+
+			try {
 				documentXML = new XML(documentContents);
-			}
-			catch (error:TypeError)
-			{
+			} catch (error : TypeError) {
 				processingFailed = true;
 			}
-			
-			if (documentXML != null)
-			{
-				var vastVersion:Number;
-				if(documentXML.localName() == VAST_1_ROOT){
+
+			if (documentXML != null) {
+				var vastVersion : Number;
+				if (documentXML.localName() == VAST_1_ROOT) {
 					vastVersion = VASTDataObject.VERSION_1_0;
-				}else if(documentXML.localName() == VAST_2_ROOT){
+				} else if (documentXML.localName() == VAST_2_ROOT) {
 					vastVersion = documentXML.@version;
 				}
-				
-				switch(vastVersion)
-				{
+
+				switch(vastVersion) {
 					case VASTDataObject.VERSION_1_0:
-						var vast1DocumentProcessor:VAST1DocumentProcessor = new VAST1DocumentProcessor(maxNumWrapperRedirects, httpLoader);
+						var vast1DocumentProcessor : VAST1DocumentProcessor = new VAST1DocumentProcessor(maxNumWrapperRedirects, httpLoader);
 						vast1DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSED, cloneDocumentProcessorEvent);
-						vast1DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent);						
-						vast1DocumentProcessor.processVASTDocument(documentContents);					
-					break;
+						vast1DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent);
+						vast1DocumentProcessor.processVASTDocument(documentContents);
+						break;
 					case VASTDataObject.VERSION_2_0:
-						var vast2DocumentProcessor:VAST2DocumentProcessor = new VAST2DocumentProcessor(maxNumWrapperRedirects, httpLoader);
+						var vast2DocumentProcessor : VAST2DocumentProcessor = new VAST2DocumentProcessor(maxNumWrapperRedirects, httpLoader);
 						vast2DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSED, cloneDocumentProcessorEvent);
-						vast2DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent); 					
+						vast2DocumentProcessor.addEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent);
 						vast2DocumentProcessor.processVASTDocument(documentContents, trackingData);
-					break;
+						break;
 					default:
 						processingFailed = true;
-					break;
-				}			
+						break;
+				}
 			}
-			if (processingFailed)
-			{
-				CONFIG::LOGGING
-				{
+			if (processingFailed) {
+				CONFIG::LOGGING {
 					logger.debug("[VAST] Processing failed for document with contents: " + documentContents);
 				}
-				
+
 				dispatchEvent(new VASTDocumentProcessedEvent(VASTDocumentProcessedEvent.PROCESSING_FAILED));
-			}			
+			}
 		}
-		
-		private function cloneDocumentProcessorEvent(event:VASTDocumentProcessedEvent):void
-		{
-			var parser:EventDispatcher = event.target as EventDispatcher;
+
+		private function cloneDocumentProcessorEvent(event : VASTDocumentProcessedEvent) : void {
+			var parser : EventDispatcher = event.target as EventDispatcher;
 			parser.removeEventListener(VASTDocumentProcessedEvent.PROCESSED, cloneDocumentProcessorEvent);
-			parser.removeEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent); 
+			parser.removeEventListener(VASTDocumentProcessedEvent.PROCESSING_FAILED, cloneDocumentProcessorEvent);
 			dispatchEvent(event.clone());
 		}
 
-		private var maxNumWrapperRedirects:Number;
-		private var httpLoader:HTTPLoader;
-		
-		private static const VAST_1_ROOT:String = "VideoAdServingTemplate";
-		private static const VAST_2_ROOT:String = "VAST";
-		
+		private var maxNumWrapperRedirects : Number;
+		private var httpLoader : HTTPLoader;
+		private static const VAST_1_ROOT : String = "VideoAdServingTemplate";
+		private static const VAST_2_ROOT : String = "VAST";
 		CONFIG::LOGGING
-		private static const logger:Logger = Log.getLogger("org.osmf.vast.loader.VASTDocumentProcessor");
+		private static const logger : Logger = Log.getLogger("org.osmf.vast.loader.VASTDocumentProcessor");
 	}
 }
