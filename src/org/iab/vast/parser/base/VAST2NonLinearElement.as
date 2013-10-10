@@ -1,59 +1,30 @@
-/*****************************************************
-*  
-*  Copyright 2010 Eyewonder, LLC.  All Rights Reserved.
-*  
-*****************************************************
-*  The contents of this file are subject to the Mozilla Public License
-*  Version 1.1 (the "License"); you may not use this file except in
-*  compliance with the License. You may obtain a copy of the License at
-*  http://www.mozilla.org/MPL/
-*   
-*  Software distributed under the License is distributed on an "AS IS"
-*  basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
-*  License for the specific language governing rights and limitations
-*  under the License.
-*   
-*  
-*  The Initial Developer of the Original Code is Eyewonder, LLC.
-*  Portions created by Eyewonder, LLC. are Copyright (C) 2010 
-*  Eyewonder, LLC. A Limelight Networks Business. All Rights Reserved. 
-*  
-*****************************************************/
-package org.iab.vast.parser.base
-{
+package org.iab.vast.parser.base {
 	/**
 	 * Internal non-linear element parser and data object
-	 * 
-	 *  
-	 *  @langversion 3.0
-	 *  @playerversion Flash 10
-	 *  @playerversion AIR 1.5
-	 *  @productversion OSMF 1.0
-	 */	 
-	public dynamic class VAST2NonLinearElement extends VAST2Element
-	{
+	 */
+	public dynamic class VAST2NonLinearElement extends VAST2Element {
 		/* All these variables are references or arrays of references */
-		private var _id:String;
-		private var _width:Number;
-		private var _height:Number;
-		private var _expandedWidth:Number;
-		private var _expandedHeight:Number;
+		private var _id : String;
+		private var _width : Number;
+		private var _height : Number;
+		private var _expandedWidth : Number;
+		private var _expandedHeight : Number;
 		/* NO LONGER USED
 		private var _resourceType:String;
 		private var _creativeType:String; */
-		private var _scalable:Boolean;
-		private var _maintainAspectRatio:Boolean;
-		private var _staticResource:String;
-		private var _iframeResource:String;
-		private var _htmlResource:String;
-		private var _staticResourceCreativeType:String;
+		private var _scalable : Boolean;
+		private var _maintainAspectRatio : Boolean;
+		private var _staticResource : String;
+		private var _iframeResource : String;
+		private var _htmlResource : String;
+		private var _staticResourceCreativeType : String;
 		/* NO LONGER USED
 		private var _URL:String;
 		private var _Code:String; */
-		private var _AltText:String;
-		private var _apiFramework:String;
-		private var _adParameters:String;
-		private var _NonLinearClickThrough:String;
+		private var _AltText : String;
+		private var _apiFramework : String;
+		private var _adParameters : String;
+		private var _NonLinearClickThrough : String;
 	
 		/**
 		 * @private
@@ -84,8 +55,8 @@ package org.iab.vast.parser.base
 			
 			if ( forxData == null || trackingData == null)
 			{
-				//UIFDebugMessage.getInstance()._debugMessage(3, "Element" + elementName + " is just a temporary placeholder.", "Instream", elementName); 	
-				return;		// Just a placeholder object to prevent null reference errors
+				// Just a placeholder object to prevent null reference errors
+				return;		
 			}
 		}
 
@@ -183,14 +154,14 @@ package org.iab.vast.parser.base
 		/**
 		 * @private
 		 */	
-		public function get iframeResource():String {return _iframeResource };
+		public function get iframeResource():String {return _iframeResource; };
 		/**
 		 * @private
 		 */	
-		public function get htmlResource():String { return _htmlResource};
+		public function get htmlResource():String { return _htmlResource;};
 		/**
 		 * @private
 		 */	
-		public function get adParameters():String { return _adParameters};	
+		public function get adParameters():String { return _adParameters;};	
 	}
 }
